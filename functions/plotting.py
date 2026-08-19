@@ -84,7 +84,7 @@ def plot_spectrum_db_octaves_multi(ax, spectra, title):
     ax.legend()
 
 
-def plot_impulse_response(ax, sample_rate, time, impulse_response):
+def plot_impulse_response(ax, time, impulse_response, time_end):
     ir_db = librosa.amplitude_to_db(impulse_response)
 
     ax.plot(time, ir_db, 'r')
@@ -92,10 +92,7 @@ def plot_impulse_response(ax, sample_rate, time, impulse_response):
     ax.grid(True)
 
     # Set x lim to last value-floor transition
-    search_region = ir_db[:len(ir_db)//2]
-    last_value_pos = np.where(search_region > min(ir_db))[0][-1]
-    time_pos = last_value_pos / sample_rate
-    ax.set_xlim(0, time_pos)
+    ax.set_xlim(0, time_end)
 
     ax.set_xlabel("Time (s)")
     ax.set_ylabel("Impulse response (dB)")
