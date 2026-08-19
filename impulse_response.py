@@ -53,13 +53,3 @@ if __name__=="__main__":
 
 
     save_figure(fig, "Impulse_response")
-
-
-    # fig_time.suptitle("Amplitude vs Time")
-    # fig_freq.suptitle("Magnitude Spectrum")
-
-    # fig_time.tight_layout()
-    # fig_freq.tight_layout()
-
-    # save_figure(fig_time, "Amplitude_Time_Comparison")
-    # save_figure(fig_freq, "Magnitude_Spectrum_Comparison")
