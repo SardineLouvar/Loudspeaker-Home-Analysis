@@ -3,8 +3,8 @@ import matplotlib.pyplot as plt
 from scipy.io import wavfile
 
 from functions.utility_funcs import check_folders, seconds_to_samples
-from functions.analysis_funcs import get_magnitude_freq_data, find_sweep_start_in_recording, smooth_octave
-from functions.plotting import save_figure
+from functions.analysis_funcs import find_sweep_start_in_recording
+from functions.plotting import save_figure, plot_impulse_response
 
 
 def get_impulse_response(input,output):
@@ -16,7 +16,8 @@ def get_impulse_response(input,output):
     reg_fraction = 0.01
     epsilon = reg_fraction * np.max(np.abs(input_fft))
     transfer_function = (output_fft * np.conj(input_fft)) / (np.abs(input_fft)**2 + epsilon**2)
-    impulse_response = np.fft.irfft*(transfer_function)
+
+    impulse_response = np.fft.irfft(transfer_function)
     return impulse_response
 
 
@@ -31,24 +32,28 @@ if __name__=="__main__":
 
     sample_rate, input_sweep = wavfile.read("audio/input_sweep.wav")
 
-    time = seconds_to_samples(sample_rate,10)
+    time = np.linspace(0,10,seconds_to_samples(sample_rate,10))
 
-    fig_time, axes_time = plt.subplots(1, len(FILES), figsize=(6 * len(FILES), 4))
-    fig_freq, axes_freq = plt.subplots(1, len(FILES), figsize=(6 * len(FILES), 4))
+    fig, ax = plt.subplots(1, len(FILES), figsize=(6 * len(FILES), 4))
 
     for i, (path, label) in enumerate(FILES):
-        sample_rate, signal = wavfile.read(path)\
-        
+        sample_rate, signal = wavfile.read(path)
 
         # Get accurate time range for sweep in recording
         true_start = find_sweep_start_in_recording(sample_rate,input_sweep,signal,4,16)
-        target_signal = signal[true_start : true_start + len(input_sweep)]
+        output_sweep = signal[true_start : true_start + input_sweep.shape[0]]
 
-        impulse_response = get_impulse_response(signal,target_signal)
+        impulse_response = get_impulse_response(input_sweep,output_sweep)
 
-        plt.plot(impulse_response,time)
+        plot_impulse_response(ax[i], sample_rate, time, impulse_response)
+        ax[i].set_title(label)
 
-    plt.show()
+    fig.suptitle("Impulse Response from Sweep Start to End")
+    fig.tight_layout()
+
+
+    save_figure(fig, "Impulse_response")
+
 
     # fig_time.suptitle("Amplitude vs Time")
     # fig_freq.suptitle("Magnitude Spectrum")

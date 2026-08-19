@@ -2,9 +2,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy.io import wavfile
 
-from utility_funcs import check_folders
-from analysis_funcs import find_sweep_start_in_recording, get_magnitude_freq_data, smooth_octave
-from plotting import plot_spectrum_db_octaves_multi, save_figure
+from functions.utility_funcs import check_folders
+from functions.analysis_funcs import find_sweep_start_in_recording, get_magnitude_freq_data, smooth_octave
+from functions.plotting import plot_spectrum_db_octaves_multi, save_figure
 
 
 def get_magnitude_freq_data_naive(input, output, sample_rate):
