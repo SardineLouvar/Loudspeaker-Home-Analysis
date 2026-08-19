@@ -1,7 +1,7 @@
-# Loudspeaker-Acoustic-Characterisation
+# Analysis of a Loudspeaker using a Standard Microphone
 A project where I measure and plot the frequency response of my speaker using a standard microphone. 
 
-This project is currently in development, and will be completed and have a corresponding report made by the 28th August 2026.
+*This project is currently in development, and will be completed and have a corresponding report made by the 28th August 2026.*
 
 
 ## Running the Code
