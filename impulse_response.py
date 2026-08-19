@@ -1,3 +1,5 @@
+import os
+
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.io import wavfile
@@ -20,9 +22,19 @@ def get_impulse_response(input,output):
     impulse_response = np.fft.irfft(transfer_function)
     return impulse_response
 
+def impulse_to_wav(ir):
+    # normalise to compress to audible level
+    ir_normalised = ir / np.max(np.abs(ir))
+
+    sample_length = seconds_to_samples(sample_rate,0.3)
+    ir_trimmed = ir_normalised[:sample_length]
+
+    wavfile.write("audio/generated/30cm_normal_impulse.wav", sample_rate, ir_trimmed.astype(np.float32))
+
 
 if __name__=="__main__":
     check_folders()
+    os.makedirs("audio/generated", exist_ok=True)
 
     FILES = [
         ("audio/30cm_normal.wav", "30cm Normal"),
@@ -44,6 +56,10 @@ if __name__=="__main__":
         output_sweep = signal[true_start : true_start + input_sweep.shape[0]]
 
         impulse_response = get_impulse_response(input_sweep,output_sweep)
+
+        # Generate wav from impulse response
+        if label == "30cm Normal":
+            impulse_to_wav(impulse_response)
 
         plot_impulse_response(ax[i], sample_rate, time, impulse_response)
         ax[i].set_title(label)

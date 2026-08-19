@@ -91,7 +91,6 @@ def plot_impulse_response(ax, sample_rate, time, impulse_response):
 
     ax.grid(True)
 
-
     # Set x lim to last value-floor transition
     search_region = ir_db[:len(ir_db)//2]
     last_value_pos = np.where(search_region > min(ir_db))[0][-1]
