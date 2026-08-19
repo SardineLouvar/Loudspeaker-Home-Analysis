@@ -21,7 +21,7 @@ python -m [file_name]
 
 
 ## Equipment
-Measurements were recorded using a Fifine AM8 Microphone, connected to a PC using a USB cable. This microphone is specified to have a frequency response of 50-16kHz \cite{fifine}. The speaker used to take measurements from is a Trumix AR7 loudspeaker, which has a specified frequency response of 50Hz-20kHz$\pm$3dB \cite{trumix}. A Trumix TM-12 Audio Interface was used to interface the loudspeaker to the PC.
+Measurements were recorded using a Fifine AM8 Microphone, connected to a PC using a USB cable. This microphone is specified to have a frequency response of 50-16kHz [1]. The speaker used to take measurements from is a Trumix AR7 loudspeaker, which has a specified frequency response of 50Hz-20kHz plus/minus 3dB [2]. A Trumix TM-12 Audio Interface was used to interface the loudspeaker to the PC.
 
 ## Experimental Method
 A microphone was placed 50cm away from a speaker, angled so that the microphone capsule was vertically centered between the tweeter and woofer. Both the speaker and microphone were placed on a desk mat to add a small amount of padding to reduce vibration through the table that the experiment was performed on.
