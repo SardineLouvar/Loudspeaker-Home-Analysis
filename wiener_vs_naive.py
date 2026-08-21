@@ -52,5 +52,5 @@ if __name__ == "__main__":
 
     fig.tight_layout()
 
-    save_figure(fig, "30cm_Loud_Naive_vs_Normal")
+    save_figure(fig, "30cm_Loud_Wiener_vs_Naive")
 
